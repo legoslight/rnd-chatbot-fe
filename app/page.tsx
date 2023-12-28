@@ -66,7 +66,7 @@ export default function Home() {
   return (
     <main className="h-screen bg-white p-6 flex flex-col">
       <div className="flex flex-col gap-8 w-full items-center flex-grow max-h-full">
-        <h1 className=" text-4xl text-transparent font-extralight bg-clip-text bg-gradient-to-r from-violet-800 to-fuchsia-500">
+        <h1 className=" text-4xl text-transparent bg-clip-text bg-gradient-to-r from-violet-800 to-fuchsia-500 font-semibold">
           SCALABLY INC. R&D LAB
         </h1>
         <form
@@ -157,7 +157,7 @@ export default function Home() {
                 value={message}
                 onChange={(e) => setMessage(e.target.value)}
                 placeholder="Type a message"
-                className="w-full h-full resize-none rounded-full border border-slate-900/10 bg-white pl-6 pr-24 py-[25px] text-base placeholder:text-slate-400 focus:border-violet-500 focus:outline-none focus:ring-4 focus:ring-violet-500/10 shadow-[0_10px_40px_0px_rgba(0,0,0,0.15)]"
+                className="w-full h-full resize-none rounded-full border border-slate-900/10 bg-white pl-6 pr-24 py-[20px] text-base placeholder:text-slate-400 focus:border-violet-500 focus:outline-none focus:ring-4 focus:ring-violet-500/10 shadow-[0_10px_40px_0px_rgba(0,0,0,0.15)]"
                 onKeyDown={(e) => {
                   if (e.key === "Enter" && !e.shiftKey) {
                     e.preventDefault();
