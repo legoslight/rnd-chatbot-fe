@@ -3,6 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { Message } from "@/types/message";
 import { Send } from "react-feather";
 import LoadingDots from "@/components/LoadingDots";
+import ReloadIcon from "@/public/reload.svg";
 
 export default function Home() {
   const [message, setMessage] = useState<string>("");
@@ -30,13 +31,29 @@ export default function Home() {
     })
       .then(async (res) => {
         const r = await res.json();
-        console.log(r);
 
         setHistory((oldHistory) => [
           ...oldHistory,
           { role: "assistant", content: r?.data, links: [] },
         ]);
         setLoading(false);
+      })
+      .catch((err) => {
+        alert(err);
+      });
+  };
+
+  console.log(process.env.URL_API);
+
+  const handleSyncClick = () => {
+    fetch(`${process.env.URL_API}/sync`, {
+      method: "GET",
+      headers: { "Content-Type": "application/json" },
+    })
+      .then(async (res) => {
+        const r = await res.json();
+        alert(r?.message);
+        console.log(r);
       })
       .catch((err) => {
         alert(err);
@@ -76,6 +93,14 @@ export default function Home() {
             handleClick();
           }}
         >
+          <div className="flex justify-end">
+            <button
+              onClick={handleSyncClick}
+              className="w-[80px] mr-2 bg-gradient-to-r from-violet-800 to-fuchsia-500 text-white py-1.5 mt-2 rounded-lg"
+            >
+              Sync
+            </button>
+          </div>
           <div className="overflow-y-scroll flex flex-col gap-5 p-10 h-full">
             {history.map((message: Message, idx) => {
               const isLastMessage = idx === history.length - 1;
