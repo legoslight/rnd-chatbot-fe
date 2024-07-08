@@ -43,10 +43,8 @@ export default function Home() {
       });
   };
 
-  console.log(process.env.URL_API);
-
   const handleSyncClick = () => {
-    fetch(`${process.env.URL_API}/sync`, {
+    fetch(`${process.env.URL_API_CHAT_BOT}/sync`, {
       method: "GET",
       headers: { "Content-Type": "application/json" },
     })
