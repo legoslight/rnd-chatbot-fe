@@ -3,7 +3,7 @@ import { useState, useRef, useEffect } from "react";
 import { Message } from "@/types/message";
 import { Send } from "react-feather";
 import LoadingDots from "@/components/LoadingDots";
-import ReloadIcon from "@/public/reload.svg";
+import { marked } from "marked";
 
 export default function Home() {
   const [message, setMessage] = useState<string>("");
@@ -118,7 +118,11 @@ export default function Home() {
                         <p className="text-sm font-medium text-violet-500 mb-2">
                           Scalably AI Assistant
                         </p>
-                        {message.content}
+                        <div
+                          dangerouslySetInnerHTML={{
+                            __html: marked(message.content),
+                          }}
+                        />
                         {message.links && (
                           <div className="mt-4 flex flex-col gap-2">
                             <p className="text-sm font-medium text-slate-500">

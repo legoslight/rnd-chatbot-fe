@@ -18,6 +18,7 @@
     "debug": "^4.3.4",
     "follow-redirects": "^1.15.2",
     "langchain": "^0.0.127",
+    "marked": "^13.0.2",
     "next": "13.4.13",
     "pinecone-client": "^1.1.0",
     "postcss": "8.4.27",
