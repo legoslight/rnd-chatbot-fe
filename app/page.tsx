@@ -16,7 +16,7 @@ export default function Home() {
   const lastMessageRef = useRef<HTMLDivElement | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
-  function dokuWikiToMarkdown(text) {
+  function dokuWikiToMarkdown(text: string) {
     // Convert bold text
     text = text.replace(/\*\*(.*?)\*\*/g, '**$1**');
     
