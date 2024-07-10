@@ -16,6 +16,26 @@ export default function Home() {
   const lastMessageRef = useRef<HTMLDivElement | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
+  function dokuWikiToMarkdown(text) {
+    // Convert bold text
+    text = text.replace(/\*\*(.*?)\*\*/g, '**$1**');
+    
+    // Convert images
+
+    const domain = 'https://wiki.scalably.com/lib/exe/fetch.php?media='
+    text = text.replace(/{{ :(.*?)\?(.*?) \|}}/g, `<img src="${domain}$1" width="$2" alt="image" />`);
+  
+    // Convert links
+    text = text.replace(/\[\[(.*?)\|(.*?)\]\]/g, '[$2]($1)');
+  
+    // Convert headers
+    text = text.replace(/====== (.*?) ======/g, '# $1');
+    const htmlText = marked(text);
+
+    return htmlText;
+  }
+  
+  
   const handleClick = () => {
     if (message == "") return;
     setHistory((oldHistory) => [
@@ -120,7 +140,7 @@ export default function Home() {
                         </p>
                         <div
                           dangerouslySetInnerHTML={{
-                            __html: marked(message.content),
+                            __html: dokuWikiToMarkdown(message?.content || ''),
                           }}
                         />
                         {message.links && (
